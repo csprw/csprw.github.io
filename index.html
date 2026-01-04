@@ -333,6 +333,24 @@
             opacity: 0;
             pointer-events: none;
         }
+
+        /* --- HIDE NATIVE VIDEO CONTROLS (iOS/Android) --- */
+        video::-webkit-media-controls {
+            display: none !important;
+        }
+
+        video::-webkit-media-controls-start-playback-button {
+            display: none !important;
+            -webkit-appearance: none;
+        }
+
+        video::-webkit-media-controls-play-button {
+            display: none !important;
+        }
+
+        video::-webkit-media-controls-panel {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -370,7 +388,8 @@
 
             <div data-href="project.html?id=about" class="project-card" data-speed="0.9"
                 style="top: 140vh; right: 5%; width: 300px; height: 400px; z-index: -1;">
-                <video autoplay muted playsinline poster="assets/about/casperwortmann.avif">
+                <video class="lazy-video" autoplay muted loop playsinline webkit-playsinline preload="none"
+                    poster="assets/about/casperwortmann.avif">
                     <source src="assets/about/face_mesh_output.webm" type="video/webm">
                     <source src="assets/about/face_mesh_output.mp4" type="video/mp4">
                 </video>
@@ -380,7 +399,8 @@
 
             <div data-href="project.html?id=architecture" class="project-card" data-speed="1.2"
                 style="top: 120vh; left: 20%; width: 500px; height: 350px;">
-                <video autoplay muted loop playsinline poster="assets/architecture/architecture.avif">
+                <video class="lazy-video" autoplay muted loop playsinline webkit-playsinline preload="none"
+                    poster="assets/architecture/architecture.avif">
                     <source src="assets/architecture/mayansongzoom2.webm" type="video/webm">
                     <source src="assets/architecture/mayansongzoom2.mp4" type="video/mp4">
                 </video>
@@ -503,7 +523,7 @@
         <nav class="footer-links">
             <a href="about.html">About</a>
         </nav>
-        <p style="color:#333">v1.0.1</p>
+        <p style="color:#333">v1.0.3</p>
     </section>
 
     <script>
