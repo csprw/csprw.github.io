@@ -21,4 +21,8 @@
     <loc>https://www.casperwortmann.com/project.html?id=lollipop</loc>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://www.casperwortmann.com/project.html?id=other</loc>
+    <priority>0.6</priority>
+  </url>
   </urlset>
