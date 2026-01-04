@@ -135,6 +135,27 @@
             /* Change cursor to indicate clickable */
         }
 
+        .card-link {
+            position: absolute;
+            inset: 0;
+            /* Stretches to top, right, bottom, left: 0 */
+            z-index: 20;
+            /* sits on top of video */
+            cursor: pointer;
+        }
+
+        /* Optional: hide the text inside the link visually but keep for screen readers */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
         .project-card .media {
             position: relative;
             width: 100%;
@@ -347,39 +368,44 @@
 
 
 
-            <a href="project.html?id=about" class="project-card" data-speed="0.9"
+            <div data-href="project.html?id=about" class="project-card" data-speed="0.9"
                 style="top: 140vh; right: 5%; width: 300px; height: 400px; z-index: -1;">
-                <video class="priority-video" autoplay muted playsinline poster="assets/about/casperwortmann.avif">
+                <video autoplay muted playsinline poster="assets/about/casperwortmann.avif">
                     <source src="assets/about/face_mesh_output.webm" type="video/webm">
                     <source src="assets/about/face_mesh_output.mp4" type="video/mp4">
                 </video>
                 <div class="card-text">About</div>
-            </a>
+                <a href="about.html" class="card-link"><span class="sr-only">About Casper Wortmann</span></a>
+            </div>
 
-            <a href="project.html?id=architecture" class="project-card" data-speed="1.2"
+            <div data-href="project.html?id=architecture" class="project-card" data-speed="1.2"
                 style="top: 120vh; left: 20%; width: 500px; height: 350px;">
-                <video class="priority-video" autoplay muted loop playsinline
-                    poster="assets/architecture/architecture.avif">
+                <video autoplay muted loop playsinline poster="assets/architecture/architecture.avif">
                     <source src="assets/architecture/mayansongzoom2.webm" type="video/webm">
                     <source src="assets/architecture/mayansongzoom2.mp4" type="video/mp4">
                 </video>
                 <div class="card-text">Architecture<br>and<br>Emotion</div>
-            </a>
+                <a href="project.html?id=architecture" class="card-link"><span class="sr-only">Architecture and
+                        Emotion</span></a>
+            </div>
 
-            <a href="project.html?id=lollipop" class="project-card" data-speed="1.1"
+            <div data-href="project.html?id=lollipop" class="project-card" data-speed="1.1"
                 style="top: 475vh; left: 5%; width: 230px; height: 300px; z-index: -1;">
                 <img src="assets/lollipop/prins.avif">
                 <div class="card-text">Dear<br>Lollipop</div>
-            </a>
+                <a href="project.html?id=lollipop" class="card-link"><span class="sr-only">Dear Lollipop</span></a>
+            </div>
 
 
-            <a href="project.html?id=dbf" class="project-card" data-speed="1.0"
+            <div data-href="project.html?id=dbf" class="project-card" data-speed="1.0"
                 style="top: 295vh; right: 15%; width: 500px; height: 380px;">
                 <img src="assets/dbf/dbf_010.avif">
                 <div class="card-text">Dear<br>Beloved<br>Friend</div>
-            </a>
+                <a href="project.html?id=lollipop" class="card-link"><span class="sr-only">Dear Beloved
+                        Friend</span></a>
+            </div>
 
-            <a href="project.html?id=brothers" class="project-card" data-speed="1.4"
+            <div data-href="project.html?id=brothers" class="project-card" data-speed="1.4"
                 style="top: 270vh; left: 10%; width: 380px; height: 500px;">
                 <!-- <img src="assets/brothers/broeders.gif"> -->
                 <video autoplay loop muted playsinline>
@@ -387,9 +413,10 @@
                     <source data-src="assets/brothers/broeders.webm" type="video/webm">
                 </video>
                 <div class="card-text">Brothers</div>
-            </a>
+                <a href="project.html?id=brothers" class="card-link"><span class="sr-only">Brothers</span></a>
+            </div>
 
-            <a href="project.html?id=grond" class="project-card" data-speed="1.2"
+            <div data-href="project.html?id=grond" class="project-card" data-speed="1.2"
                 style="top: 295vh; left: 20%; width: 450px; height: 300px;">
                 <div class="media">
                     <img src="assets/grond/grond02.avif" alt="">
@@ -399,24 +426,29 @@
                     </video>
                 </div>
                 <div class="card-text">Grond</div>
-            </a>
+                <a href="project.html?id=grond" class="card-link"><span class="sr-only">Grond</span></a>
+            </div>
 
 
-            <a href="project.html?id=calling-the-shots" class="project-card" data-speed="1.4"
+            <div data-href="project.html?id=calling-the-shots" class="project-card" data-speed="1.4"
                 style="top: 480vh; left: 5%; width: 380px; height: 300px; z-index: -1;">
                 <img src="assets/cts/field_IBM_calling_the_shots_image_02.avif">
                 <div class="card-text">Calling<br>The<br>Shots</div>
-            </a>
+                <a href="project.html?id=calling-the-shots" class="card-link"><span class="sr-only">Calling The
+                        Shots</span></a>
+            </div>
 
-            <a href="project.html?id=architecture-research" class="project-card" d data-speed="0.9"
+            <div data-href="project.html?id=architecture-research" class="project-card" d data-speed="0.9"
                 style="top: 350vh; right: 5%; width: 300px; height: 400px; z-index: -1;">
                 <img src="assets/architecture-research/research_001.avif">
                 <div class="card-text">Trash<br>vs<br>Maquette</div>
-            </a>
+                <a href="project.html?id=rchitecture-research" class="card-link"><span
+                        class="sr-only">Research</span></a>
+            </div>
 
 
 
-            <a href="project.html?id=sevilla" class="project-card" ddata-speed="0.7"
+            <div data-href="project.html?id=sevilla" class="project-card" ddata-speed="0.7"
                 style="top: 350vh; left: 40%; width: 300px; height: 200px; z-index: -2;">
                 <div class="media">
                     <img src="assets/sevilla/sevilla.jpg" alt="">
@@ -426,10 +458,11 @@
                     </video>
                 </div>
                 <div class="card-text">Sevilla</div>
-            </a>
+                <a href="project.html?id=sevilla" class="card-link"><span class="sr-only">Sevilla</span></a>
+            </div>
 
 
-            <a href="project.html?id=dreaming-computer" class="project-card" d data-speed="1.11"
+            <div data-href="project.html?id=dreaming-computer" class="project-card" d data-speed="1.11"
                 style="top: 570vh; right: 5%; width: 500px; height: 300px; z-index: -2;">
                 <img src="assets/dreaming-computer/dream01_fbgif.gif">
                 <!-- <video autoplay muted playsinline>
@@ -437,10 +470,10 @@
                     <source data-src="assets/dreaming-computer/dream01.mp4" type="video/mp4">
                 </video> -->
                 <div class="card-text">Dreaming<br>Computer</div>
-            </a>
+            </div>
 
 
-            <a href="project.html?id=other" class="project-card" data-speed="0.9"
+            <div data-href="project.html?id=other" class="project-card" data-speed="0.9"
                 style="top: 540vh; left: 15%; width: 300px; height: 400px; z-index: -3;">
                 <div class="media">
                     <img src="assets/other/oprah_wide.avif" alt="">
@@ -450,13 +483,13 @@
                     </video>
                 </div>
                 <div class="card-text">Other<br>Projects</div>
-            </a>
+            </div>
 
-            <a href="project.html?id=oxygendepth" class="project-card" d data-speed="1.25"
+            <div data-href="project.html?id=oxygendepth" class="project-card" d data-speed="1.25"
                 style="top: 680vh; right: 15%; width: 200px; height: 300px; z-index: -2;">
                 <img src="assets/zuurstof/zuurstof.avif">
                 <div class="card-text">Oxygen<br>Depth</div>
-            </a>
+            </div>
         </div>
 
     </div>
@@ -467,6 +500,7 @@
         <nav class="footer-links">
             <a href="about.html">About</a>
         </nav>
+        <p style="color:#333">v1.0.0</p>
     </section>
 
     <script>
@@ -481,19 +515,9 @@
                 video.setAttribute("muted", "");
                 video.playsInline = true;
                 video.setAttribute("playsinline", "");
-
-                // --- FIX STARTS HERE ---
-                // If this is a priority video (top of page), let it load naturally.
-                // Otherwise, stop it from loading until we scroll to it.
-                if (video.classList.contains('priority-video')) {
-                    video.setAttribute("preload", "auto");
-                    // We mark it as ready so the CSS opacity transition happens immediately
-                    video.classList.add("is-ready");
-                } else {
-                    video.setAttribute("preload", "none");
-                    video.classList.remove("is-ready");
-                }
-                // --- FIX ENDS HERE ---
+                video.setAttribute("preload", "none");
+                // Don't show black if it fails: start hidden until ready
+                video.classList.remove("is-ready");
             }
 
             function loadSources(video) {
@@ -675,8 +699,8 @@
                     e.preventDefault();
                     isTransitioning = true;
 
-                    //const href = card.getAttribute("data-href");
-                    const href = card.getAttribute("href");
+                    const href = card.getAttribute("data-href");
+                    // const href = card.getAttribute("href");
 
                     // 1. Detect if it's an Image or Video
                     let media = card.querySelector("img");
