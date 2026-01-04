@@ -349,7 +349,7 @@
 
             <a href="project.html?id=about" class="project-card" data-speed="0.9"
                 style="top: 140vh; right: 5%; width: 300px; height: 400px; z-index: -1;">
-                <video autoplay muted playsinline poster="assets/about/casperwortmann.avif">
+                <video class="priority-video" autoplay muted playsinline poster="assets/about/casperwortmann.avif">
                     <source src="assets/about/face_mesh_output.webm" type="video/webm">
                     <source src="assets/about/face_mesh_output.mp4" type="video/mp4">
                 </video>
@@ -358,7 +358,8 @@
 
             <a href="project.html?id=architecture" class="project-card" data-speed="1.2"
                 style="top: 120vh; left: 20%; width: 500px; height: 350px;">
-                <video autoplay muted loop playsinline poster="assets/architecture/architecture.avif">
+                <video class="priority-video" autoplay muted loop playsinline
+                    poster="assets/architecture/architecture.avif">
                     <source src="assets/architecture/mayansongzoom2.webm" type="video/webm">
                     <source src="assets/architecture/mayansongzoom2.mp4" type="video/mp4">
                 </video>
@@ -480,9 +481,19 @@
                 video.setAttribute("muted", "");
                 video.playsInline = true;
                 video.setAttribute("playsinline", "");
-                video.setAttribute("preload", "none");
-                // Don't show black if it fails: start hidden until ready
-                video.classList.remove("is-ready");
+
+                // --- FIX STARTS HERE ---
+                // If this is a priority video (top of page), let it load naturally.
+                // Otherwise, stop it from loading until we scroll to it.
+                if (video.classList.contains('priority-video')) {
+                    video.setAttribute("preload", "auto");
+                    // We mark it as ready so the CSS opacity transition happens immediately
+                    video.classList.add("is-ready");
+                } else {
+                    video.setAttribute("preload", "none");
+                    video.classList.remove("is-ready");
+                }
+                // --- FIX ENDS HERE ---
             }
 
             function loadSources(video) {
