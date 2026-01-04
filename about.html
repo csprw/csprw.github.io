@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="canonical" href="https://www.casperwortmann.com/about.html" />
+
+    <title>Casper Wortmann - Creative Technologist & AI Engineer</title>
+    <meta name="description"
+        content="Portfolio of Casper Wortmann. Machine Learning Engineer and Creative Technologist based in Amsterdam, specializing in interactive art, AI performance, and computational design.">
+    <meta name="keywords"
+        content="Casper Wortmann, Creative Technologist, Machine Learning, AI Art, Amsterdam, Interaction Design, Python, Generative Art">
+
+    <style>
+        /* --- CSS (Identical to project.html) --- */
+        :root {
+            --bg-color: #050505;
+            --text-color: #f0f0f0;
+            --accent: #333;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Helvetica Neue', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: zoomOut 1.5s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+            filter: brightness(0.6);
+        }
+
+        @keyframes zoomOut {
+            from {
+                transform: scale(1.1);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .hero-title {
+            position: absolute;
+            bottom: 10%;
+            left: 5%;
+            font-size: 8vw;
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 0.9;
+            color: white;
+            opacity: 0;
+            /* Will be handled by JS scramble */
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            padding: 4rem 5%;
+            border-bottom: 1px solid var(--accent);
+        }
+
+        .meta-item h3 {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .meta-item p {
+            font-size: 1.2rem;
+            font-weight: 500;
+            opacity: 0;
+            /* Will be handled by JS scramble/fade */
+        }
+
+        .meta-item p a {
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 1px solid #666;
+            transition: all 0.3s ease;
+        }
+
+        .meta-item p a:hover {
+            color: white;
+            border-bottom-color: white;
+        }
+
+        .description-section {
+            padding: 4rem 5%;
+            max-width: 900px;
+        }
+
+        .ai-text {
+            font-size: 1.5rem;
+            line-height: 1.0;
+            min-height: 25rem;
+        }
+
+        .ai-text-secondary {
+            font-size: 1.2rem;
+            line-height: 1.2;
+            color: #ccc;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 2rem;
+            background: white;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .hidden-source {
+            opacity: 0;
+            position: absolute;
+            z-index: -100;
+            pointer-events: none;
+            white-space: normal;
+        }
+
+        .text-block {
+            display: block;
+            opacity: 0;
+            transform: translateY(20px);
+            margin-bottom: 1.5rem;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .text-block.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .carousel-section {
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid #111;
+            border-bottom: 1px solid #111;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 4rem;
+            padding: 0 5%;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-bottom: 2rem;
+            overflow-y: hidden;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-img {
+            min-width: 60vw;
+            height: 70vh;
+            object-fit: cover;
+            background: #111;
+            opacity: 0;
+            /* Hidden until fly-in observer triggers */
+            transform: scale(0.8);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        @media (orientation: landscape) {
+            .carousel-img {
+                min-width: 35vw;
+                height: 80vh;
+            }
+        }
+
+        @media (orientation: portrait) {
+            .carousel-img {
+                min-width: 90vw;
+                height: 60vh;
+            }
+
+            .carousel-track {
+                gap: 1rem;
+            }
+        }
+
+        .next-project {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid var(--accent);
+            margin-top: 4rem;
+        }
+
+        .next-link {
+            font-size: 4vw;
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 800;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .next-link:hover {
+            opacity: 1;
+        }
+
+        /* --- NEW STYLES FOR PROJECT INDEX --- */
+        .project-index-container {
+            margin-top: 3rem;
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+        }
+
+        .project-index-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .project-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .project-list li a {
+            color: #888;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s, padding-left 0.3s;
+            display: block;
+        }
+
+        .project-list li a:hover {
+            color: #fff;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hero">
+        <video class="hero-img" id="hero-img" autoplay loop muted playsinline webkit-playsinline>
+            <source src="assets/about/face_mesh_output.mp4" type="video/mp4">
+            <source src="assets/about/face_mesh_output.webm" type="video/webm">
+        </video>
+        <h1 class="hero-title" id="main-title">Casper Wortmann</h1>
+    </header>
+
+    <section class="meta-grid" id="meta-container">
+        <div class="meta-item">
+            <h3>Name</h3>
+            <p class="scramble-target">Casper Wortmann</p>
+        </div>
+        <div class="meta-item">
+            <h3>Discipline</h3>
+            <p class="scramble-target">Creative Technologist & AI Engineer</p>
+        </div>
+        <div class="meta-item">
+            <h3>Location</h3>
+            <p class="scramble-target">Amsterdam, NL</p>
+        </div>
+        <div class="meta-item">
+            <h3>Contact</h3>
+            <p class="scramble-target"><a href="https://www.linkedin.com/in/casper-wortmann-69b744193/"
+                    target="_blank">LinkedIn</a></p>
+        </div>
+    </section>
+
+    <section class="description-section">
+        <div class="ai-text" id="typewriter-intro"></div>
+        <div id="raw-intro" class="hidden-source">
+            <i>Casper Wortmann</i> works at the intersection of artificial intelligence, interaction, and computation.
+            Based in Amsterdam, he combines a Master's degree in artificial intelligence with a background in
+            performance art. <br>His work ranges from experimental installations to production-level machine learning
+            systems, often blurring the line between technical infrastructure and lived experience.
+        </div>
+    </section>
+
+    <section class="carousel-section">
+        <div class="carousel-track" id="track-1">
+            <img src="assets/about/imtheartist2.avif" class="carousel-img fly-in">
+            <img src="assets/about/dbf.avif" class="carousel-img fly-in">
+            <img src="assets/about/oerol-min.avif" class="carousel-img fly-in">
+            <img src="assets/about/dbf_004.avif" class="carousel-img fly-in">
+            <img src="assets/about/isla.avif" class="carousel-img fly-in">
+            <img src="assets/about/dbf_006.avif" class="carousel-img fly-in">
+            <img src="assets/about/cts.avif" class="carousel-img fly-in">
+            <img src="assets/about/apollo.gif" class="carousel-img fly-in">
+            <img src="assets/about/solo-min.avif" class="carousel-img fly-in">
+        </div>
+    </section>
+
+    <section class="description-section">
+        <div class="ai-text ai-text-secondary" id="typewriter-detail"></div>
+        <div id="raw-detail" class="hidden-source">
+            Looking for me? Find me on LinkedIn or give me a call.
+        </div>
+
+        <div class="project-index-container text-block">
+            <span class="project-index-label">Quick access to selected works:</span>
+            <ul class="project-list">
+                <li><a href="project.html?id=architecture">Architecture and Emotion</a></li>
+                <li><a href="project.html?id=brothers">Brothers</a></li>
+                <li><a href="project.html?id=dbf">Dear Beloved Friend</a></li>
+                <li><a href="project.html?id=lollipop">Dear Lollipop</a></li>
+                <li><a href="project.html?id=calling-the-shots">Calling The Shots</a></li>
+                <li><a href="project.html?id=sevilla">Sevilla</a></li>
+                <li><a href="project.html?id=dreaming-computer">Dreaming Computer</a></li>
+                <li><a href="project.html?id=oxygendepth">Oxygen Depth</a></li>
+                <li><a href="project.html?id=architecture-research">Trash vs Maquette</a></li>
+                <li><a href="project.html?id=grond">Grond</a></li>
+                <li><a href="project.html?id=other">Other Projects</a></li>
+            </ul>
+        </div>
+
+    </section>
+
+    <section class="carousel-section">
+        <div class="carousel-track" id="track-2">
+            <img src="assets/about/mayaonsong_1b.avif" class="carousel-img fly-in">
+            <img src="assets/about/mayansong_2-min.avif" class="carousel-img fly-in">
+            <img src="assets/about/mayansong_3-min.avif" class="carousel-img fly-in">
+            <img src="assets/about/mayansong_4-min.avif" class="carousel-img fly-in">
+            <img src="assets/about/mayansong_5-min.avif" class="carousel-img fly-in">
+        </div>
+    </section>
+
+    <div class="next-project">
+        <a href="index.html" class="next-link">Back to Home -></a>
+    </div>
+
+    <script>
+        // --- ANIMATION FUNCTIONS ---
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
+
+        function scrambleReveal(element, finalText, duration = 1500) {
+            if (!element) return;
+            const textToUse = finalText || element.innerText;
+            let iteration = 0;
+            const length = textToUse.length;
+            const intervalTime = 30;
+            const totalFrames = duration / intervalTime;
+            element.style.opacity = 1;
+            const interval = setInterval(() => {
+                element.innerText = textToUse.split("").map((l, i) => {
+                    if (i < iteration) return textToUse[i];
+                    return chars[Math.floor(Math.random() * chars.length)];
+                }).join("");
+                iteration += length / totalFrames;
+                if (iteration >= length) {
+                    clearInterval(interval);
+                    element.innerText = textToUse;
+                }
+            }, intervalTime);
+        }
+
+        function typeWriterIntro(targetId, textId, speed = 20) {
+            const target = document.getElementById(targetId);
+            const rawSource = document.getElementById(textId);
+            if (!target || !rawSource) return;
+
+            let cleanText = rawSource.innerHTML;
+            cleanText = cleanText.replace(/<br\s*\/?>/gi, '§');
+            cleanText = cleanText.replace(/<i\b[^>]*>/gi, '↑');
+            cleanText = cleanText.replace(/<\/i>/gi, '↓');
+            cleanText = cleanText.replace(/(\r\n|\n|\r)/gm, " ").replace(/\s+/g, ' ').trim();
+
+            let i = 0;
+            let hasStarted = false;
+            let currentItalic = null;
+
+            const cursor = document.createElement('span');
+            cursor.className = 'cursor';
+            target.appendChild(cursor);
+
+            function type() {
+                const char = cleanText.charAt(i);
+                if (char === '§') {
+                    const br = document.createElement('br');
+                    if (currentItalic) currentItalic.appendChild(br); else cursor.before(br);
+                } else if (char === '↑') {
+                    currentItalic = document.createElement('i');
+                    cursor.before(currentItalic);
+                } else if (char === '↓') {
+                    currentItalic = null;
+                } else {
+                    if (currentItalic) currentItalic.textContent += char;
+                    else cursor.before(char);
+                }
+                i++;
+                if (i < cleanText.length) {
+                    const isMarker = (char === '§' || char === '↑' || char === '↓');
+                    setTimeout(type, isMarker ? 0 : speed + (Math.random() * 15));
+                } else { cursor.style.display = 'none'; }
+            }
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting && !hasStarted) { hasStarted = true; type(); observer.disconnect(); }
+            }, { threshold: 0.1 });
+            observer.observe(target);
+        }
+
+        function revealTextBlocks(targetId, textId) {
+            const target = document.getElementById(targetId);
+            const rawSource = document.getElementById(textId);
+            if (!target || !rawSource) return;
+            let rawHTML = rawSource.innerHTML.replace(/(\r\n|\n|\r)/gm, "");
+            const blocks = rawHTML.split(/<br\s*\/?>/gi).filter(txt => txt.trim().length > 0);
+
+            blocks.forEach(blockContent => {
+                const p = document.createElement('div');
+                p.className = 'text-block';
+                p.innerHTML = blockContent.trim();
+                target.appendChild(p);
+            });
+
+            // Special handling: Make sure the project index (which is manually added in HTML) also fades in
+            const staticBlocks = document.querySelectorAll('.project-index-container');
+            staticBlocks.forEach(block => {
+                block.classList.add('text-block'); // Ensure it has base class
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    target.querySelectorAll('.text-block').forEach((child, index) => {
+                        setTimeout(() => { child.classList.add('visible'); }, index * 200);
+                    });
+
+                    // Trigger the project index list fade in
+                    staticBlocks.forEach((child, index) => {
+                        setTimeout(() => { child.classList.add('visible'); }, (blocks.length * 200) + 200);
+                    });
+
+                    observer.disconnect();
+                }
+            }, { threshold: 0.1 });
+            observer.observe(target);
+        }
+
+        const flyInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translate(0, 0) scale(1)';
+                    flyInObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // --- INIT STATIC PAGE ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Scramble Title
+            const title = document.getElementById('main-title');
+            setTimeout(() => {
+                scrambleReveal(title, "Casper Wortmann", 2000);
+            }, 500);
+
+            // 2. Animate Meta Tags
+            const metas = document.querySelectorAll('.scramble-target');
+            metas.forEach((meta, index) => {
+                if (meta.querySelector('a')) {
+                    meta.style.opacity = 0;
+                    setTimeout(() => {
+                        meta.style.transition = "opacity 1s";
+                        meta.style.opacity = 1;
+                    }, 800 + (index * 200));
+                } else {
+                    setTimeout(() => {
+                        scrambleReveal(meta, meta.innerText, 800);
+                    }, 800 + (index * 200));
+                }
+            });
+
+            // 3. Typewriter Effects
+            typeWriterIntro('typewriter-intro', 'raw-intro', 10);
+            revealTextBlocks('typewriter-detail', 'raw-detail');
+
+            // 4. Randomize Carousel
+            const images = document.querySelectorAll('.carousel-img');
+            images.forEach(img => {
+                const randomX = (Math.random() - 0.5) * 200;
+                const randomY = 100 + Math.random() * 100;
+                img.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.9)`;
+                flyInObserver.observe(img);
+            });
+        });
+    </script>
+</body>
+
+</html>
